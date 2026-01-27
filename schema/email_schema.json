@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Email Parsing Schema",
+  "description": "Standardized schema for parsed email data used in triage pipelines.",
+  "type": "object",
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the schema used to generate this JSON."
+    },
+
+    "email_id": {
+      "type": "string",
+      "description": "Unique identifier for the email (hash, filename, or message-id)."
+    },
+
+    "headers": {
+      "type": "object",
+      "description": "Normalized email header fields.",
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "cc": { "type": "string" },
+        "reply_to": { "type": "string" },
+        "subject": { "type": "string" },
+        "date": { "type": "string" },
+        "message_id": { "type": "string" },
+        "mime_version": { "type": "string" },
+        "content_type": { "type": "string" },
+
+        "received": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "All Received: headers in order."
+        },
+
+        "other_headers": {
+          "type": "object",
+          "description": "Non-standard or vendor-specific headers.",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "required": ["from", "subject"]
+    },
+
+    "body": {
+      "type": "object",
+      "description": "Email body content in multiple formats.",
+      "properties": {
+        "text": { "type": "string" },
+        "html": { "type": "string" },
+        "sanitized_html": { "type": "string" }
+      }
+    },
+
+    "attachments": {
+      "type": "array",
+      "description": "List of attachments extracted from the email.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "filename": { "type": "string" },
+          "content_type": { "type": "string" },
+          "size": { "type": "integer" },
+          "hashes": {
+            "type": "object",
+            "properties": {
+              "md5": { "type": "string" },
+              "sha1": { "type": "string" },
+              "sha256": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "urls": {
+      "type": "array",
+      "description": "Extracted URLs with normalization and metadata.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "raw": { "type": "string" },
+          "normalized": { "type": "string" },
+          "domain": { "type": "string" },
+          "tld": { "type": "string" },
+          "is_obfuscated": { "type": "boolean" }
+        },
+        "required": ["raw"]
+      }
+    },
+
+    "domains": {
+      "type": "array",
+      "description": "Domains extracted from URLs, headers, and body.",
+      "items": { "type": "string" }
+    },
+
+    "sender_anomalies": {
+      "type": "array",
+      "description": "Detected anomalies in sender identity or headers.",
+      "items": { "type": "string" }
+    },
+
+    "feature_flags": {
+      "type": "object",
+      "description": "Feature-engineered signals for triage modeling.",
+      "additionalProperties": { "type": "boolean" }
+    },
+
+    "parsing_metadata": {
+      "type": "object",
+      "description": "Metadata about the parsing process for auditability.",
+      "properties": {
+        "parser_version": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "source_file": { "type": "string" }
+      }
+    }
+  },
+
+  "required": ["schema_version", "headers", "body"]
+}

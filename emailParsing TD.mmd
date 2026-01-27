@@ -1,0 +1,11 @@
+flowchart TD
+    %% Nodes
+        A("Email (.eml)")
+        B("Parser (Python)")
+        C("Indicator Extractor (Python)")
+        D("Normalization + Feature Engineering")
+        E("JSON Output Using MISP Standard")
+        F("Stored in DB")
+
+    %% Edge connections between nodes
+        A --> B --> C --> D --> E --> F

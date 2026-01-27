@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "email_id": "123456",
+  "headers": {
+    "from": "Microsoft <Microsoft@customersfeedback.microsoft.com>",
+    "to": "josiahgrvs@gmail.com",
+    "subject": "Microsoft requests your feedback",
+    "date": "Tue, 30 Dec 2025 08:13:04 -0800",
+    "other_headers": {}
+  },
+  "body": {
+    "text": "",
+    "html": ""
+  },
+  "urls": [],
+  "attachments": [],
+  "metadata": {
+    "parser_version": "0.1.0",
+    "timestamp": "2026-01-26T00:00:00Z"
+  }
+}
