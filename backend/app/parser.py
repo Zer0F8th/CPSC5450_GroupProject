@@ -1,21 +1,34 @@
 import os
-import email
 from email import policy
 from email.parser import BytesParser
 import json
 from jsonschema import validate, ValidationError
+import logging
 
+
+# Initalize Logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+
+# Set more dynamics File Paths. TODO make more robust file paths
 # Designate import file path TODO: make dynamic
-file_path = r"input\UTC ACM's First Meeting of the Semester!.eml"
+full_path = os.path.realpath(__file__)
+dir_path = os.path.dirname(full_path)
+json_path = f"{dir_path}/schema/email_schema.json"
+file_path = f"{dir_path}/input/UTC ACM's First Meeting of the Semester!.eml"
+
+logging.debug(f"[*] Full File Path: {full_path}\n")
+logging.debug(f"[*] Directory File Path: {full_path}\n")
+logging.debug(f"[*] Email File Path: {full_path}\n")
+logging.debug(f"[*] EML File Path: {full_path}\n")
 
 # Open the schema file for email messages
-with open("schema/email_schema.json", "r") as schema_file:
+with open(json_path, "r") as schema_file:
     schema = json.load(schema_file)
 
-
-
 # Convert email file into email message object
-with open(file_path, 'rb') as fp:
+with open(file_path, "rb") as fp:
     message = BytesParser(policy=policy.default).parse(fp)
 
 # Create a dictionary that matches the schema
@@ -27,18 +40,12 @@ parsed_email = {
         "to": message.get("To"),
         "subject": message.get("Subject"),
         "date": message.get("Date"),
-        "other_headers": {}
+        "other_headers": {},
     },
-    "body": {
-        "text": "",
-        "html": ""
-    },
+    "body": {"text": "", "html": ""},
     "urls": [],
     "attachments": [],
-    "metadata": {
-        "parser_version": "0.1.0",
-        "timestamp": "2026-01-26T00:00:00Z"
-    }
+    "metadata": {"parser_version": "0.1.0", "timestamp": "2026-01-26T00:00:00Z"},
 }
 
 # Validate parsed email against schema
