@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "email_id": "123456",
   "headers": {
-    "from": "Microsoft <Microsoft@customersfeedback.microsoft.com>",
-    "to": "josiahgrvs@gmail.com",
-    "subject": "Microsoft requests your feedback",
-    "date": "Tue, 30 Dec 2025 08:13:04 -0800",
+    "from": "\"Gressel, Brendan\" <0000019b7122a2be-dmarc-request@RAVEN.UTC.EDU>",
+    "to": "CSE-GRAD@RAVEN.UTC.EDU",
+    "subject": "UTC ACM's First Meeting of the Semester!",
+    "date": "Wed, 28 Jan 2026 15:05:18 +0000",
     "other_headers": {}
   },
   "body": {

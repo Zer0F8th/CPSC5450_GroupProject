@@ -6,7 +6,7 @@ import json
 from jsonschema import validate, ValidationError
 
 # Designate import file path TODO: make dynamic
-file_path = r"C:\Users\Josiah\OneDrive\Documents\Education\UTC\2026 Spring\CPSC 5440\Project 2\Microsoft requests your feedback.eml"
+file_path = r"input\UTC ACM's First Meeting of the Semester!.eml"
 
 # Open the schema file for email messages
 with open("schema/email_schema.json", "r") as schema_file:
@@ -53,7 +53,7 @@ folder_path = "output"
 file_path = os.path.join(folder_path, "data.json")
 os.makedirs(folder_path, exist_ok=True)
 
-# Write the list to a json file TODO: make location dynamic, make each filename unique, 
+# Write the list to a json file TODO: make location dynamic, make each filename unique
 try:
     with open("output/data.json", "w") as outfile:
         json.dump(parsed_email, outfile, indent=2)

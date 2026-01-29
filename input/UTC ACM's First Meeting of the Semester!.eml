@@ -1,0 +1,237 @@
+Delivered-To: wjr486@mocs.utc.edu
+Received: by 2002:a05:6124:5126:b0:42a:95e7:f113 with SMTP id co38csp17279vlb;
+        Wed, 28 Jan 2026 07:15:27 -0800 (PST)
+X-Forwarded-Encrypted: i=3; AJvYcCXG/g8xxpUbqhiuinjJS6WKRxEe6VVlAtY7nsMPKcLuf8UlAm0aeYMregNFNTdDhaYwjiq90WQ=@mocs.utc.edu
+X-Received: by 2002:a05:690e:c48:b0:645:5aed:324f with SMTP id 956f58d0204a3-6498fc6b884mr4138479d50.80.1769613327620;
+        Wed, 28 Jan 2026 07:15:27 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1769613327; cv=fail;
+        d=google.com; s=arc-20240605;
+        b=CowDqMrfWFaHWLt43v0+FbiZTsO5n2IE6HHvGsNJi3heCdae9wLTB66HH4jvPtcNit
+         iNis9pAyKgGWO6U04v2aF7/WFx/xbeoCitsgs0hBYe9jZldm/Rq196ToLwPsMvwIGHOi
+         TziRrNwa5XmAnrTKMglOQYrwLfZlgH7FIvCoDn71Jbsr8qWjHBh7icuPldirqZ5+jRLA
+         mMF749vdftoEei3TSeWOKpizgDA2zaWIQqO79CTh6M3BF38Y5CHgURE+4Vqo1kuFeVQD
+         tEdBq9dKlxQByI9KwOKGoucALClinPJyYJ7oik9XPbZp+JeFNPrT7yTosRFCH/eWWhxO
+         mKZA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=list-archive:list-owner:list-subscribe:list-unsubscribe-post
+         :list-unsubscribe:list-help:precedence:to:comments:subject:from
+         :reply-to:date:message-id:mime-version:msip_labels:content-language
+         :accept-language:thread-index:thread-topic;
+        bh=VkIPfHosF6U/GegovEctvGdaBfXvKYNWbe7YJgscnD4=;
+        fh=MT5ZUUAkRB8AlCKpzMsz5gqOkkGtlWIS/XZUWeBsQR4=;
+        b=EyJ00kpHFwmE5P+JC9evdYJSEgqrmIafjUWla2COC6C9JBtJnhLC0c7JUEciwnqI6y
+         gjFuuMK2vw9Sz9ibxifA8ZnIzJt6+pO0F5ovtX0rZssgBUKippDQmkNM/qjrReHL5HWX
+         7AkdwHiB/2WXIusOi0MyGZR2zhyhSP8XjW/35ixAhBnaFzXK8JN2EFresjSzV4Dx+QLs
+         /vrLZDh3m2E+EN5o3iIlYZGg18Af08OXx/RykhNZynkeD1bBStaTSDQBMv1ejU9fKpsy
+         tXjY7p9n/OnDTyqD0ulCPuDh3krlBSXtBZFFk+01gPP8l/K4eMhpYH3ytMKiCTjrue3i
+         rYNQ==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       arc=fail (body hash mismatch);
+       spf=pass (google.com: domain of owner-cse-grad*wjr486**mocs*-utc*-edu@raven.utc.edu designates 2603:10b6:8:1ac::12 as permitted sender) smtp.mailfrom=owner-cse-grad*wjr486**MOCS*-UTC*-EDU@raven.utc.edu
+Return-Path: <owner-cse-grad*wjr486**MOCS*-UTC*-EDU@raven.utc.edu>
+Received: from smtp.utc.edu (smtp2018.cha.utc.edu. [150.182.130.191])
+        by mx.google.com with ESMTP id 956f58d0204a3-64996141796si1564980d50.264.2026.01.28.07.15.27
+        for <wjr486@mocs.utc.edu>;
+        Wed, 28 Jan 2026 07:15:27 -0800 (PST)
+Received-SPF: pass (google.com: domain of owner-cse-grad*wjr486**mocs*-utc*-edu@raven.utc.edu designates 2603:10b6:8:1ac::12 as permitted sender) client-ip=2603:10b6:8:1ac::12;
+Authentication-Results: mx.google.com;
+       arc=fail (body hash mismatch);
+       spf=pass (google.com: domain of owner-cse-grad*wjr486**mocs*-utc*-edu@raven.utc.edu designates 2603:10b6:8:1ac::12 as permitted sender) smtp.mailfrom=owner-cse-grad*wjr486**MOCS*-UTC*-EDU@raven.utc.edu
+Received: from listserv21 ([172.27.90.9]) by smtp.utc.edu with Microsoft SMTPSVC(10.0.14393.4169);
+	 Wed, 28 Jan 2026 10:15:25 -0500
+Received: by RAVEN.UTC.EDU (LISTSERV-TCP/IP release 17.5) with spool id
+          11207992 for CSE-GRAD@RAVEN.UTC.EDU; Wed, 28 Jan 2026 10:15:25 -0500
+Received: from smtp.utc.edu ([172.27.90.9]) by RAVEN.UTC.EDU (SMTPL release
+          1.1f) (envelope-from <brendan-gressel@utc.edu>) with TCP; Wed, 28 Jan
+          2026 10:05:21 -0500
+Received: from CH4PR07CU001.outbound.protection.outlook.com ([172.27.90.9]) by
+          smtp.utc.edu over TLS secured channel with Microsoft
+          SMTPSVC(10.0.14393.4169); Wed, 28 Jan 2026 10:05:21 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+          b=GO4I4h1x8fPKZW+yKMb5hUW/NteQ1ojUIgY6Wle/9mYPKxNO9CpO2ulQtMedeBRMoWwg7/VRNluBFtn2G47xB5OtkuhjWPC63uGTtF13eOuPDmx/DIWHV4+1G/jKk45DI/JGP8Gez/XGEIXNmDaAW+6Pv1ronP37QmwZy+QulpkWdxaQwM841xOQ650+rJRUc44tau8NBTHMNNH3f4y42vStMQ0s/U2tf4jGxMuvWb6cpJUW9u1QwFvjhlqrsVMPl9EUyRvvTNpR1jlBgv4TE7GdIIG4g6tLEQzHobiK97VSbAHfdfhSoS5Rh9qdQhcbtyoR4Qlq3y1KN5/jgY8wYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+                       s=arcselector10001;
+                       h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+                       bh=go6TZt+fxSc0WoVpRlO3LUKukMUtToHcByPKZ+H8jGQ=;
+                       b=jjIbYgqfwCEtSywEa9OYgc1y8VraWL7LKBsOG1GlT9beVjOF/enQoh+mYmhWr+iuvRrTOrIpBh1m0+RxHsNwz/GRQ6dFWGgZENLbrKGrpgOVLk5lNvhD7rjKOHEj2ig2tq+IwCWSnhdNEevA6c8v1Ahmpw3ewq4zAEys8w0kj3iRGX+vGPVgH05Pa2qdWkHXm5SyT0kfIsxwa38XpYQnLVsVsVMK8HhxzgPFv9mz/ogB5kBVKLsSlDIG1uFUaH9mE9NJKIJUjQKvk0mlXVLD2+Zn2sNqzI+Gwc7pbDjyv2VmSg2mI3I3Xj+qWfswkErWBGxdgAoQeJvUD6TCubv2iQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+                         smtp.mailfrom=utc.edu; dmarc=pass action=none
+                         header.from=utc.edu; dkim=pass header.d=utc.edu;
+                         arc=none
+Received: from DM3PR02MB10295.namprd02.prod.outlook.com (2603:10b6:8:1ac::12)
+          by DS0PR02MB10616.namprd02.prod.outlook.com (2603:10b6:8:1fc::22)
+          with Microsoft SMTP Server (version=TLS1_2,
+          cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.15; Wed,
+          28 Jan 2026 15:05:18 +0000
+Received: from DM3PR02MB10295.namprd02.prod.outlook.com
+          ([fe80::f671:7e8b:e549:25b3]) by
+          DM3PR02MB10295.namprd02.prod.outlook.com
+          ([fe80::f671:7e8b:e549:25b3%6]) with mapi id 15.20.9542.010; Wed, 28
+          Jan 2026 15:05:18 +0000
+Thread-Topic: UTC ACM's First Meeting of the Semester!
+Thread-Index: AQHckGbqhtnj06dMzUuk3yBJN3fzjQ==
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM3PR02MB10295:EE_|DS0PR02MB10616:EE_
+x-ms-office365-filtering-correlation-id: 754c6eea-f686-4be6-15cd-08de5e7ea675
+x-microsoft-antispam: BCL:0;ARA:13230040|366016|13003099007|8096899003|41050700001;
+x-microsoft-antispam-message-info:
+                         HFn0rz4ll5q6r+Nj8IORPATfQBhYRIelA9u+iVkETqFTgErrTFZwvdupBmwdCxsbTaBZKpdGKFeoGVVKL1I8Q9NUwKt/HZgumd9M4XsH6vPGQqYDHcBXc1QlIvduXCotd8XplCT2+WfbcG6DnW97P43vX+qz8vEsy1eHGO97bj8nT8Dfw7qjstTv5tX6MbmlJyu4AtM6nyBzjuGuJzksIVroY5bogi0Y9SDw2aeGbSCr6ffgLtLH4qCI6hWmAErpOXCJY3H69QO5KOWROc2jslklhdXdm+NX5S04xRTydIQ7cF0fdwkM5Vqf5qug8EGpf4VWISwNw3Qi1d1pUwxrefs5CmpAQXJzW/K4QhJ/MCUE3wpHjWmCPf1vfIxV4DLn0ymoEVMnQOB8kD0oNSe6wqMmkjdNJtMPT0ulZYDeSca7TgSeRaC36sgnBlc/nmFO6pG893TsQ6SV+RT6r5O78B5r6wWmiAJQlCsLqLvtYL4W9LCF/AjWJ1J6CG7fTyCsLHNqiQIskoLk4oNCQ8yis+Uxq2rkRx5IOP/Q8X8auR2cYVB8heptlp0gOEaA5f4TntqvwcfOy9iLDpDKaKHyfQ4+ZfeJdCfz6ny4jmoerHVB2X/ET4YyYV9qUlR2JwD3IrLl9k/VnsgG88RyOzg4hKxyMCDqNDibz9kXDsLR3W8HKjaoLmjnis1liDuCIOyhnSD4aD3IaM2SUvkhTwT81W/5adfeqq5yq48irqhMTLM=
+x-forefront-antispam-report:
+                         CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM3PR02MB10295.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(13003099007)(8096899003)(41050700001);DIR:INT;
+Content-Type: multipart/alternative; boundary="_000_DM3PR02MB1029572F674B17F274E2AFE3CE691ADM3PR02MB10295na_"
+MIME-Version: 1.0
+X-OriginatorOrg: utc.edu
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM3PR02MB10295.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id:
+                         754c6eea-f686-4be6-15cd-08de5e7ea675
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jan 2026 15:05:18.4260 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 515813d9-717d-45dd-9eca-9aa19c09d6f9
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname:
+                         2gf077rgXxICQ4xalqW6tBdvTYwuS6Dz4jxzqxHMeDxCPhADXwSlsdGppHfWZQsb
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR02MB10616
+X-MS-Exchange-CrossPremises-AuthAs: Internal
+X-MS-Exchange-CrossPremises-AuthMechanism: 04
+X-MS-Exchange-CrossPremises-AuthSource: DM3PR02MB10295.namprd02.prod.outlook.com
+X-MS-Exchange-CrossPremises-TransportTrafficType: Email
+X-MS-Exchange-CrossPremises-SCL: 1
+X-MS-Exchange-CrossPremises-messagesource: StoreDriver
+X-MS-Exchange-CrossPremises-BCC:
+X-MS-Exchange-CrossPremises-originalclientipaddress:
+                         2620:ed:c000:e025:6d36:138c:6fea:c9ab
+X-MS-Exchange-CrossPremises-transporttraffictype: Email
+X-MS-Exchange-CrossPremises-antispam-scancontext:
+                         DIR:Originating;SFV:NSPM;SKIP:0;
+X-MS-Exchange-CrossPremises-processed-by-journaling: Journal Agent
+X-OrganizationHeadersPreserved: DS0PR02MB10616.namprd02.prod.outlook.com
+X-OriginalArrivalTime: 28 Jan 2026 15:05:21.0302 (UTC)
+                       FILETIME=[85AD2360:01DC9067]
+Message-ID:  <DM3PR02MB1029572F674B17F274E2AFE3CE691A@DM3PR02MB10295.namprd02.prod.outlook.com>
+Date:         Wed, 28 Jan 2026 15:05:18 +0000
+Reply-To:     "Gressel, Brendan" <brendan-gressel@UTC.EDU>
+From:         "Gressel, Brendan" <0000019b7122a2be-dmarc-request@RAVEN.UTC.EDU>
+Subject: UTC ACM's First Meeting of the Semester!
+Comments: To: "CSE-UG@RAVEN.UTC.EDU" <cse-ug@raven.utc.edu>
+To:           CSE-GRAD@RAVEN.UTC.EDU
+Precedence: list
+X-ms-reactions: disallow
+List-Help: <http://raven.utc.edu/SCRIPTS/WA.EXE?LIST=CSE-GRAD>,
+           <mailto:LISTSERV@RAVEN.UTC.EDU?body=INFO%20CSE-GRAD>
+List-Unsubscribe: <mailto:CSE-GRAD-unsubscribe-request@RAVEN.UTC.EDU>,
+                  <http://raven.utc.edu/SCRIPTS/WA.EXE?TICKET=NzM5Njc0IHdqcjQ4NkBNT0NTLlVUQy5FRFUgQ1NFLUdSQUQgIMXABQ%2FWx4qE&c=SIGNOFF>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+List-Subscribe: <mailto:CSE-GRAD-subscribe-request@RAVEN.UTC.EDU>
+List-Owner: <mailto:CSE-GRAD-request@RAVEN.UTC.EDU>
+List-Archive: <http://raven.utc.edu/SCRIPTS/WA.EXE?LIST=CSE-GRAD>
+Return-Path: owner-cse-grad*wjr486**MOCS*-UTC*-EDU@RAVEN.UTC.EDU
+
+--_000_DM3PR02MB1029572F674B17F274E2AFE3CE691ADM3PR02MB10295na_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Hey everyone!
+We=92re kicking off the semester with the first UTC ACM meeting, and we=92d=
+ love to see you there!
+When: Friday, January 30th, 2026 at 12:00 PM
+Where: ECS Building, Room 321
+We=92ll have pizza and a fun icebreaker activity to help everyone meet and =
+connect=97so come hungry and ready to hang out!
+It=92s a great chance to meet other students interested in computing and ge=
+t a preview of what ACM has planned for the semester. Whether you=92re a re=
+turning member or brand new, you=92re more than welcome.
+Join our Discord to stay up to date with all club events: https://discord.g=
+g/ssJhudVntc
+Let=92s start the semester strong.
+Best regards,
+The UTC ACM Team
+
+
+########################################################################
+
+To unsubscribe from the CSE-GRAD list, click the following link:
+http://raven.utc.edu/SCRIPTS/WA.EXE?TICKET=3DNzM5Njc0IHdqcjQ4NkBNT0NTLlVUQy5FRFUgQ1NFLUdSQUQgIMXABQ%2FWx4qE&c=3DSIGNOFF
+
+--_000_DM3PR02MB1029572F674B17F274E2AFE3CE691ADM3PR02MB10295na_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Hey everyone!</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+We=92re kicking off the semester with the<b>&nbsp;</b>first <b>U=
+TC ACM meet=
+ing</b>, and we=92d love to see you there!</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+<b>When:</b>&nbsp;Friday, January 30th, 2026 at <b>12:00 PM</b><=
+br>
+<b>Where:</b>&nbsp;ECS Building, Room 321</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+We=92ll have <b>pizza</b>&nbsp;and a fun <b>icebreaker activity<=
+/b>&nbsp;to=
+ help everyone meet and connect=97so come hungry and ready to hang out!</di=
+v>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+It=92s a great chance to meet other students interested in computing and ge=
+t a preview of what ACM has planned for the semester. Whether you=92re a re=
+turning member or brand new, you=92re more than welcome.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Join our Discord to stay up to date with all club events: <a class=3D"OWAAu=
+toLink" id=3D"OWA3ea54371-5f6c-3307-30c7-d9bcd96ae938" href=3D"https://disc=
+ord.gg/ssJhudVntc">
+https://discord.gg/ssJhudVntc</a></div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Let=92s start the semester strong.&nbsp;</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Best regards,</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+The UTC ACM Team</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+</body>
+</html>
+<br>
+<hr>
+<p align=3D"center">To unsubscribe from the CSE-GRAD list, click the following link:<br>
+<a href=3D"http://raven.utc.edu/SCRIPTS/WA.EXE?TICKET=3DNzM5Njc0IHdqcjQ4NkBNT0NTLlVUQy5FRFUgQ1NFLUdSQUQgIMXABQ%2FWx4qE&c=3D=
+SIGNOFF" target=3D"_blank">http://raven.utc.edu/SCRIPTS/WA.EXE?TICKET=3D=
+NzM5Njc0IHdqcjQ4NkBNT0NTLlVUQy5FRFUgQ1NFLUdSQUQgIMXABQ%2FWx4qE&c=3DSIGNOFF</a>
+</p>
+
+--_000_DM3PR02MB1029572F674B17F274E2AFE3CE691ADM3PR02MB10295na_--
