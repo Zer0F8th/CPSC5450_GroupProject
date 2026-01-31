@@ -5,7 +5,6 @@ import json
 from jsonschema import validate, ValidationError
 import logging
 
-
 # Initalize Logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
