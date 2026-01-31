@@ -4,11 +4,25 @@ from email import policy
 from email.parser import BytesParser
 from jsonschema import validate, ValidationError
 from datetime import datetime, timezone
+from fastapi import HTTPException
 
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schema" / "email_schema.json"
 
 def load_schema():
-    return json.loads(SCHEMA_PATH.read_text())
+    try:
+        return json.loads(SCHEMA_PATH.read_text())
+    except FileNotFoundError:
+        # Return a clear HTTP error if the schema file is missing
+        raise HTTPException(
+            status_code=500,
+            detail="Schema file not found.",
+        )
+    except json.JSONDecodeError:
+        # Return a clear HTTP error if the schema JSON is invalid
+        raise HTTPException(
+            status_code=500,
+            detail="Invalid schema JSON.",
+        )
 
 def parse_eml_bytes(eml_bytes: bytes) -> dict:
     message = BytesParser(policy=policy.default).parsebytes(eml_bytes)
