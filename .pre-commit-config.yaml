@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: detect-private-key
+      - id: pretty-format-json
+      - id: trailing-whitespace
+      - id: no-commit-to-branch
+        args: ['--branch', 'main', '--branch', 'master']
+  # Installl ruff formatter
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.14.14
+    hooks:
+      - id: ruff-check
+        args: ['--fix']
+      - id: ruff-format
+        types_or: [ python, pyi ]
